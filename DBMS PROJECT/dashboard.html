@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SMART LMS - Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background: #f4f6f9;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #2f3542;
+      color: #fff;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar .logo {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .sidebar .nav {
+      list-style: none;
+    }
+
+    .sidebar .nav li {
+      padding: 1rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .sidebar .nav li:hover {
+      background: #57606f;
+    }
+
+    .main {
+      flex: 1;
+      padding: 1rem 2rem;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 2rem;
+    }
+
+    .admin-info {
+      font-weight: 600;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dashboard-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    .card p {
+      font-size: 1.8rem;
+      color: #2f3542;
+    }
+
+    .form-section {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
+    }
+
+    .form-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      color: #333;
+    }
+
+    .form-input {
+      margin-bottom: 1rem;
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .form-input[type="file"] {
+      padding: 0.5rem;
+    }
+
+    .form-submit {
+      background: #28a745;
+      color: #fff;
+      padding: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .form-submit:hover {
+      background: #218838;
+    }
+    a {
+  color: inherit;  /* Inherit color from the parent element */
+  text-decoration: none;  /* Remove the underline */
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2 class="logo">SMART LMS</h2>
+      <ul class="nav">
+        <li><i class='bx bxs-dashboard'></i> Dashboard</li>
+        <li><a href="admin_courses.html"><i class='bx bxs-book-content'></i> Manage Courses</a></li>
+        <li><a href="manage_students.html"><i class='bx bxs-user-detail'></i> Manage Students</a></li>
+        <li><a a href="manage_assignment.html"><i class='bx bxs-file'></i> Assignments</a></li>
+        <li><a href="http://localhost/project/view_attendance.html"><i class='bx bxs-calendar-check'></i> Attendance</a></li>
+        <li><a href="manage_guideline.html"><i class='bx bxs-bar-chart-alt-2'></i>Guideline</a></li>
+        <li><a href="login.html"><i class='bx bx-log-out'></i> Logout</></li>
+      </ul>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="admin-info">
+          <i class='bx bxs-user-circle'></i> Admin
+        </div>
+      </header>
+
+      <section class="dashboard-cards">
+        <div class="card">
+          <h3>Total Students</h3>
+          <p id="studentCount">--</p>
+        </div>
+        <div class="card">
+          <h3>Total Courses</h3>
+          <p id="courseCount">--</p>
+        </div>
+        <div class="card">
+          <h3>Active Assignments</h3>
+          <p id="assignmentCount">--</p>
+        </div>
+        <div class="card">
+          <h3>Attendance Today</h3>
+          <p id="attendanceToday">--</p>
+        </div>
+      </section>
+
+      <!-- Student Profile Editor Form -->
+      <section class="form-section">
+        <h3>Edit Student Profile</h3>
+        <form action="update_student.php" method="POST" enctype="multipart/form-data">
+          <input type="text" name="studentName" class="form-input" placeholder="Student Name" required/>
+          <input type="email" name="studentEmail" class="form-input" placeholder="Student Email" required/>
+          <select name="enrolledCourses" class="form-input" required>
+            <option value="">Select Course</option>
+            <!-- Dynamically fill this list -->
+            <option value="AIML">AIML</option>
+            <option value="DATABASE MANAGEMENT SYSTEM">DATABASE MANAGEMENT SYSTEM</option>
+          </select>
+          <input type="file" name="studentPhoto" class="form-input" />
+          <button type="submit" class="form-submit">Update Profile</button>
+        </form>
+      </section>
+
+      <!-- Assignment Upload Form -->
+      <section class="form-section">
+        <h3>Upload Assignment</h3>
+        <form action="upload_assignment.php" method="POST" enctype="multipart/form-data">
+          <input type="text" name="assignmentTitle" class="form-input" placeholder="Assignment Title" required/>
+          <input type="file" name="assignmentFile" class="form-input" required/>
+          <button type="submit" class="form-submit">Upload Assignment</button>
+        </form>
+      </section>
+    </main>
+  </div>
+</body>
+<script>
+  window.onload = function () {
+    fetch('get_counts.php')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('studentCount').textContent = data.students;
+        document.getElementById('courseCount').textContent = data.courses;
+        document.getElementById('assignmentCount').textContent = data.assignments;
+        document.getElementById('attendanceToday').textContent = data.attendance;
+      })
+      .catch(error => console.error('Error fetching counts:', error));
+  };
+</script>
+
+</html>

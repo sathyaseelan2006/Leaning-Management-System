@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - LMS</title>
+    <style>
+        /* General Styling */
+        body {
+            background-color: #00bcd4;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            text-align: center;
+            color: white;
+        }
+
+        .title-container {
+            margin-bottom: 20px;
+        }
+
+        .title-container h1 {
+            font-size: 32px;
+            margin: 0;
+            text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b;
+        }
+
+        .title-container p {
+            font-size: 16px;
+            font-style: italic;
+            margin: 5px 0;
+            color: #ffeb3b;
+            text-shadow: 0 0 5px #ffeb3b, 0 0 10px #ffeb3b;
+        }
+
+        /* Login Box */
+        .login-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            width: 320px;
+        }
+
+        /* Input Fields */
+        .input-group {
+            margin: 15px 0;
+        }
+
+        .input-group input, 
+        .input-group select {
+            width: 100%;
+            padding: 10px;
+            height: 44px; /* Ensuring uniform height */
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: box-shadow 0.3s ease-in-out, background 0.3s ease-in-out;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .input-group select {
+            color: black;
+            background: yellow;
+        }
+
+        /* Glowing Effect on Focus */
+        .input-group input:focus, 
+        .input-group select:focus {
+            box-shadow: 0 0 10px 2px #ffeb3b, 0 0 20px 4px rgba(255, 235, 59, 0.6);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Placeholder Styling */
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Hover Effect */
+        .input-group input:hover, 
+        .input-group select:hover {
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+        }
+
+        /* Button */
+        button {
+            background: yellow;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+            box-shadow: 0 0 10px #ffeb3b, 0 0 20px rgba(255, 235, 59, 0.6);
+        }
+
+        button:hover {
+            background: orange;
+            box-shadow: 0 0 20px #ffeb3b, 0 0 30px rgba(255, 235, 59, 0.8);
+        }
+
+        p {
+            color: white;
+        }
+
+        a {
+            color: yellow;
+            text-decoration: none;
+            font-weight: bold;
+            text-shadow: 0 0 5px #ffeb3b, 0 0 10px #ffeb3b;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Floating Background Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .element {
+            position: absolute;
+            font-size: 24px;
+            animation: float 5s linear infinite;
+            text-shadow: 0 0 10px #ffeb3b, 0 0 15px #ffeb3b;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .element:nth-child(1) { left: 10%; animation-duration: 4s; }
+        .element:nth-child(2) { left: 30%; animation-duration: 5s; }
+        .element:nth-child(3) { left: 50%; animation-duration: 6s; }
+        .element:nth-child(4) { left: 70%; animation-duration: 4.5s; }
+        .element:nth-child(5) { left: 90%; animation-duration: 5.5s; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Floating Background Elements -->
+    <div class="floating-elements">
+        <span class="element">📖</span>
+        <span class="element">✍️</span>
+        <span class="element">🔤</span>
+        <span class="element">📚</span>
+        <span class="element">📝</span>
+    </div>
+
+    <!-- Project Title & Quote -->
+    <div class="title-container">
+        <h1>Smart Learning Management System</h1>
+        <p>"Empowering education, one step at a time."</p>
+    </div>
+
+    <!-- Login Form -->
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form action="login.php" method="POST">
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="input-group">
+                    <select name="role" required>
+                        <option value="" disabled selected>Select Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="student">Student</option>
+                    </select>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

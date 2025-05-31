@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Manage Students - SMART LMS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            display: flex;
+            height: 100vh;
+            background: #f4f6f9;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+        }
+        .sidebar {
+            width: 250px;
+            background: #2f3542;
+            color: #fff;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar .logo {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .sidebar .nav {
+            list-style: none;
+        }
+        .sidebar .nav li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        .sidebar .nav li:hover {
+            background: #57606f;
+        }
+        .main {
+            flex: 1;
+            padding: 1rem 2rem;
+        }
+        .form-section {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+        .form-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: #333;
+        }
+        .student-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .student-table th,
+        .student-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .student-table th {
+            background: #2f3542;
+            color: #fff;
+        }
+        .student-actions i {
+            margin-right: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #2f3542;
+        }
+        .student-actions i:hover {
+            color: #e74c3c;
+        }
+        a {
+  color: inherit;  /* Inherit color from the parent element */
+  text-decoration: none;  /* Remove the underline */
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2 class="logo">SMART LMS</h2>
+            <ul class="nav">
+                <li><a href="dashboard.html"><i class='bx bxs-dashboard'></i> Dashboard</a></li>
+                <li><a href="admin_courses.html"><i class='bx bxs-book-content'></i> Manage Courses</a></li>
+                <li><a href="manage_students.html"><i class='bx bxs-user-detail'></i> Manage Students</a></li>
+                <li><a a href="manage_assignment.html"><i class='bx bxs-file'></i> Assignments</a></li>
+                <li><a href="http://localhost/project/view_attendance.html"><i class='bx bxs-calendar-check'></i> Attendance</a></li>
+                <li><a href="manage_guideline.html"><i class='bx bxs-bar-chart-alt-2'></i>Guideline</a></li>
+                <li><a href="login.html"><i class='bx bx-log-out'></i> Logout</></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Display Registered Students -->
+            <section class="form-section">
+                <h3>Registered Students</h3>
+                <table class="student-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Course</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentList">
+                        <!-- Students will be dynamically inserted here -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script>
+function loadStudents() {
+    fetch('students.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to load students');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const studentList = document.getElementById('studentList');
+            studentList.innerHTML = '';
+
+            if (Array.isArray(data) && data.length > 0) {
+                data.forEach(student => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${student.name}</td>
+                        <td>${student.email}</td>
+                        <td>${student.course}</td>
+                        <td class="student-actions">
+                            <i class='bx bxs-trash' onclick="deleteStudent('${student.email}')"></i>
+                        </td>
+                    `;
+                    studentList.appendChild(row);
+                });
+            } else {
+                studentList.innerHTML = `<tr><td colspan="4">${data.message || 'No students registered yet.'}</td></tr>`;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            const studentList = document.getElementById('studentList');
+            studentList.innerHTML = `<tr><td colspan="4">Error loading students.</td></tr>`;
+        });
+}
+
+        function deleteStudent(email) {
+    if (confirm("Are you sure you want to delete this student?")) {
+        fetch('delete_student.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `email=${encodeURIComponent(email)}`
+        })
+        .then(response => response.text())
+        .then(result => {
+            if (result === 'success') {
+                loadStudents();
+            } else {
+                alert('Failed to delete student.');
+            }
+        });
+    }
+}
+
+
+        // Load students when page loads
+        document.addEventListener('DOMContentLoaded', loadStudents);
+
+
+
+    </script>
+</body>
+</html>

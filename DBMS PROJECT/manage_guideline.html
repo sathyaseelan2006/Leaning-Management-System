@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Guidelines - SMART LMS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Poppins', sans-serif;
+        }
+    
+        body {
+          display: flex;
+          height: 100vh;
+          background: #f4f6f9;
+        }
+    
+        .container {
+          display: flex;
+          width: 100%;
+        }
+    
+        .sidebar {
+          width: 250px;
+          background: #2f3542;
+          color: #fff;
+          padding: 1rem;
+          display: flex;
+          flex-direction: column;
+        }
+    
+        .sidebar .logo {
+          font-size: 1.8rem;
+          margin-bottom: 2rem;
+          text-align: center;
+        }
+    
+        .sidebar .nav {
+          list-style: none;
+        }
+    
+        .sidebar .nav li {
+          padding: 1rem;
+          margin-bottom: 1rem;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          border-radius: 8px;
+          transition: background 0.3s ease;
+        }
+    
+        .sidebar .nav li:hover {
+          background: #57606f;
+        }
+    
+        .main {
+          flex: 1;
+          padding: 1rem 2rem;
+          overflow-y: auto;
+        }
+    
+        .topbar {
+          display: flex;
+          justify-content: flex-end;
+          margin-bottom: 2rem;
+        }
+    
+        .admin-info {
+          font-weight: 600;
+          font-size: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+    
+        .guidelines-container {
+          background: #ffffff;
+          padding: 2rem;
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          margin-bottom: 2rem;
+        }
+    
+        .section {
+          margin-bottom: 2rem;
+        }
+    
+        .section h2 {
+          color: #2f3542;
+          border-bottom: 2px solid #f1f1f1;
+          padding-bottom: 0.5rem;
+          margin-bottom: 1rem;
+          font-size: 1.5rem;
+        }
+    
+        .section h3 {
+          color: #57606f;
+          margin: 1.5rem 0 0.5rem;
+          font-size: 1.2rem;
+        }
+    
+        .section p, .section ul, .section ol {
+          margin-bottom: 1rem;
+          line-height: 1.6;
+          color: #333;
+        }
+    
+        .section ul, .section ol {
+          padding-left: 1.5rem;
+        }
+    
+        .section li {
+          margin-bottom: 0.5rem;
+        }
+    
+        .feature-cards {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1.5rem;
+          margin: 1.5rem 0;
+        }
+    
+        .feature-card {
+          background: #f8f9fa;
+          padding: 1.5rem;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+          border-left: 4px solid #28a745;
+        }
+    
+        .feature-card h4 {
+          color: #2f3542;
+          margin-bottom: 0.5rem;
+        }
+    
+        .highlight {
+          background: #e8f4fc;
+          padding: 1rem;
+          border-left: 4px solid #17a2b8;
+          margin: 1.5rem 0;
+          border-radius: 0 4px 4px 0;
+        }
+    
+        .warning {
+          background: #fde8e8;
+          padding: 1rem;
+          border-left: 4px solid #dc3545;
+          margin: 1.5rem 0;
+          border-radius: 0 4px 4px 0;
+        }
+    
+        .back-btn {
+          background: #28a745;
+          color: #fff;
+          padding: 0.8rem 1.5rem;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          margin-top: 1rem;
+        }
+    
+        .back-btn:hover {
+          background: #218838;
+        }
+        
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2 class="logo">SMART LMS</h2>
+      <ul class="nav">
+        <li><a href="dashboard.html"><i class='bx bxs-dashboard'></i> Dashboard</a></li>
+        <li><a href="admin_courses.html"><i class='bx bxs-book-content'></i> Manage Courses</a></li>
+        <li><a href="manage_students.html"><i class='bx bxs-user-detail'></i> Manage Students</a></li>
+        <li><a href="manage_assignment.html"><i class='bx bxs-file'></i> Assignments</a></li>
+        <li><a href="http://localhost/project/view_attendance.html"><i class='bx bxs-calendar-check'></i> Attendance</a></li>
+        <li><a href="manage_guideline.html"><i class='bx bxs-bar-chart-alt-2'></i>Guideline</a></li>
+        <li><a href="login.html"><i class='bx bx-log-out'></i> Logout</a></li>
+      </ul>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="admin-info">
+          <i class='bx bxs-user-circle'></i> Admin
+        </div>
+      </header>
+
+      <div class="guidelines-container">
+        <!-- Introduction Section -->
+        <div class="section">
+          <h2>Administrator Guidelines</h2>
+          <p>Welcome to the SMART LMS Administrator Portal. This guide provides comprehensive instructions for managing all aspects of the learning management system.</p>
+          
+          <div class="warning">
+            <p><strong>Important:</strong> Administrator privileges grant access to sensitive system functions. Always follow institutional policies when making changes.</p>
+          </div>
+        </div>
+
+        <!-- User Management Section -->
+        <div class="section">
+          <h2>User Management</h2>
+          
+          <h3>Creating User Accounts</h3>
+          <ol>
+            <li>Navigate to <strong>Users → Add New User</strong></li>
+            <li>Complete all required fields (name, email, role)</li>
+            <li>Set account activation method (email or manual)</li>
+            <li>Assign appropriate permissions based on role</li>
+            <li>Click "Create Account" to finalize</li>
+          </ol>
+
+          <h3>Bulk User Operations</h3>
+          <ul>
+            <li><strong>Import users:</strong> Use CSV template for batch uploads</li>
+            <li><strong>Export data:</strong> Generate reports with customizable fields</li>
+            <li><strong>Group actions:</strong> Apply changes to multiple users simultaneously</li>
+          </ul>
+        </div>
+
+        <!-- System Configuration Section -->
+        <div class="section">
+          <h2>System Configuration</h2>
+          
+          <div class="feature-cards">
+            <div class="feature-card">
+              <h4>Academic Settings</h4>
+              <ul>
+                <li>Term dates and schedules</li>
+                <li>Grading scales and rubrics</li>
+                <li>Course categorization</li>
+                <li>Attendance policies</li>
+              </ul>
+            </div>
+            <div class="feature-card">
+              <h4>System Preferences</h4>
+              <ul>
+                <li>Notification settings</li>
+                <li>Security configurations</li>
+                <li>Automated backups</li>
+                <li>Maintenance modes</li>
+              </ul>
+            </div>
+            <div class="feature-card">
+              <h4>Customization</h4>
+              <ul>
+                <li>Institutional branding</li>
+                <li>Custom field creation</li>
+                <li>Dashboard widgets</li>
+                <li>Role-based interfaces</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Management Section -->
+        <div class="section">
+          <h2>Data Management</h2>
+          
+          <h3>Reports Generation</h3>
+          <ol>
+            <li>Select report type from the Reports menu</li>
+            <li>Apply filters for specific data subsets</li>
+            <li>Choose output format (PDF, Excel, CSV)</li>
+            <li>Generate immediately or schedule for later</li>
+          </ol>
+
+          <div class="highlight">
+            <p><strong>Tip:</strong> Saved report templates can be reused for recurring reporting needs.</p>
+          </div>
+
+          <h3>Data Maintenance</h3>
+          <ul>
+            <li>Archive old records to optimize performance</li>
+            <li>Run data integrity checks monthly</li>
+            <li>Review and purge temporary files</li>
+          </ul>
+        </div>
+
+        <!-- Security Section -->
+        <div class="section">
+          <h2>Security & Permissions</h2>
+          
+          <h3>Access Control</h3>
+          <ul>
+            <li>Configure password complexity requirements</li>
+            <li>Set session timeout thresholds</li>
+            <li>Enable two-factor authentication</li>
+            <li>Restrict access by IP range if needed</li>
+          </ul>
+
+          <div class="warning">
+            <p><strong>Security Alert:</strong> Regularly review user access levels and audit logs for suspicious activity.</p>
+          </div>
+        </div>
+
+        <!-- Support Section -->
+        <div class="section">
+          <h2>Support Resources</h2>
+          
+          <h3>Emergency Contacts</h3>
+          <ul>
+            <li><strong>Technical Support:</strong> support@smartlms.edu (24/7)</li>
+            <li><strong>System Administrator:</strong> admin@smartlms.edu</li>
+            <li><strong>Security Team:</strong> security@smartlms.edu</li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="back-btn" onclick="goBack()">
+        <i class='bx bx-arrow-back'></i> Back to Dashboard
+      </button>
+    </main>
+  </div>
+
+  <script>
+    function goBack() {
+      window.location.href = 'dashboard.html';
+    }
+  </script>
+</body>
+</html>

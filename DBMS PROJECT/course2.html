@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course: Introduction to Programming - SMART LMS</title>
+    <style>
+        /* Background and Floating Animation */
+        body {
+            background-color: #bca4e1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            color: white;
+            position: relative;
+            padding: 20px;
+            overflow-y: auto;
+            line-height: 1.6;
+        }
+
+        .floating-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .element {
+            position: absolute;
+            font-size: 24px;
+            animation: float 5s linear infinite;
+            filter: drop-shadow(0 0 10px white);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .element:nth-child(1) { left: 10%; animation-duration: 4s; }
+        .element:nth-child(2) { left: 30%; animation-duration: 5s; }
+        .element:nth-child(3) { left: 50%; animation-duration: 6s; }
+        .element:nth-child(4) { left: 70%; animation-duration: 4.5s; }
+        .element:nth-child(5) { left: 90%; animation-duration: 5.5s; }
+
+        /* Title Styling */
+        .title-container {
+            margin: 20px 0;
+            z-index: 2;
+        }
+
+        .title-container h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .title-container p {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin: 10px 0;
+            color: #ffeb3b;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Course Content Styling */
+        .course-content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: left;
+            z-index: 2;
+            width: 85%;
+            max-width: 900px;
+            margin-bottom: 30px;
+        }
+
+        .subject {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .subject:last-child {
+            border-bottom: none;
+        }
+
+        .subject h3 {
+            font-size: 1.5rem;
+            margin: 0 0 15px;
+            color: #fffacd;
+        }
+
+        .subject p {
+            font-size: 1rem;
+            margin: 0 0 20px;
+            color: #e6e6fa;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .resources {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .resources a {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .resources a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .progress-tracker {
+            margin: 25px 0;
+        }
+
+        .progress-tracker label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        progress {
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        progress::-webkit-progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        progress::-webkit-progress-value {
+            background: #4caf50;
+            border-radius: 5px;
+        }
+
+        .progress-value {
+            display: inline-block;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .complete-btn {
+            background: #4caf50;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .complete-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .comments-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .comments-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .comments-section textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-bottom: 10px;
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .comments-section button {
+            background: #4caf50;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .comments-section button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .comments-list {
+            margin-top: 20px;
+        }
+
+        .comment {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .comment p {
+            margin: 0;
+        }
+
+        .comment strong {
+            color: #ffeb3b;
+        }
+
+        .comment-date {
+            font-size: 0.8rem;
+            color: #ccc;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: #4caf50;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+            margin: 20px 0;
+            z-index: 2;
+        }
+
+        .back-btn:hover {
+            background: #45a049;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.7);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .course-content {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .title-container h1 {
+                font-size: 2rem;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Floating Background Elements -->
+    <div class="floating-elements">
+        <span class="element">📖</span>
+        <span class="element">✍️</span>
+        <span class="element">🔤</span>
+        <span class="element">📚</span>
+        <span class="element">📝</span>
+    </div>
+
+    <!-- Title Section -->
+    <div class="title-container">
+        <h1>Introduction to Web development</h1>
+        <p>"Learn the basics of programming with web development."</p>
+    </div>
+
+    <!-- Course Content -->
+    <div class="course-content">
+        <!-- Subject 1 -->
+        <div class="subject">
+            <h3>1. Introduction to Web development</h3>
+            <p>Learn the basics of Python programming language, including syntax, variables, and basic operations.</p>
+
+            <!-- Embedded YouTube Video -->
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/NWnBxQjssvQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <!-- Downloadable Resources -->
+            <div class="resources">
+                <a href="python-intro.pdf" download>Download PDF Notes</a>
+                <a href="python-intro.pptx" download>Download Slides</a>
+                <a href="python-exercises.zip" download>Download Exercises</a>
+            </div>
+
+            <!-- Progress Tracker -->
+            <div class="progress-tracker" id="progress-tracker-1">
+                <label>Your Progress:</label>
+                <progress class="subject-progress" value="0" max="100"></progress>
+                <span class="progress-value">0%</span>
+                <button class="complete-btn" onclick="markComplete('progress-tracker-1')">Mark as Complete</button>
+            </div>
+        </div>
+
+        <!-- Subject 2 -->
+
+            <!-- Embedded YouTube Video -->
+            <div class="subject">
+                <h3>2. Sorting Algorithms</h3>
+                <p>Understand bubble sort, merge sort, and quicksort</p>
+            
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/kgBjXUE_Nwc" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            
+                <div class="resources">
+                    <a href="sorting-algorithms.pdf" download>Algorithm Cheatsheet</a>
+                    <a href="sorting-visualizer.html" download>Interactive Visualizer</a>
+                </div>
+            </div>
+
+            <!-- Downloadable Resources -->
+            <div class="resources">
+                <a href="variables.pdf" download>Download PDF Notes</a>
+                <a href="variables-cheatsheet.pdf" download>Download Cheatsheet</a>
+            </div>
+
+            <!-- Progress Tracker -->
+            <div class="progress-tracker" id="progress-tracker-2">
+                <label>Your Progress:</label>
+                <progress class="subject-progress" value="0" max="100"></progress>
+                <span class="progress-value">0%</span>
+                <button class="complete-btn" onclick="markComplete('progress-tracker-2')">Mark as Complete</button>
+            </div>
+        </div>
+
+
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+            <h3>Discussion Forum</h3>
+            <textarea id="comment-input" placeholder="Leave a comment or ask a question..." rows="4"></textarea>
+            <button onclick="addComment()">Post Comment</button>
+            <div class="comments-list" id="comments-list">
+                <div class="comment">
+                    <p><strong>Instructor:</strong> Welcome to the course! Feel free to ask any questions here.</p>
+                    <span class="comment-date">Posted on May 1, 2023</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-btn" onclick="goBack()">⬅️ Back to Dashboard</button>
+
+    <script>
+        // JavaScript for the Course Page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize any saved progress from localStorage
+            loadProgress();
+        });
+
+        // Track progress for each subject
+        const subjectProgress = {
+            'progress-tracker-1': 0,
+            'progress-tracker-2': 0,
+            'progress-tracker-3': 0
+        };
+
+        // Mark a subject as complete
+        function markComplete(trackerId) {
+            const tracker = document.getElementById(trackerId);
+            const progressBar = tracker.querySelector('progress');
+            const progressValue = tracker.querySelector('.progress-value');
+            
+            subjectProgress[trackerId] = 100;
+            progressBar.value = 100;
+            progressValue.textContent = '100%';
+            
+            // Change button text
+            const completeBtn = tracker.querySelector('.complete-btn');
+            completeBtn.textContent = '✓ Completed';
+            completeBtn.style.backgroundColor = '#2e7d32';
+            completeBtn.onclick = null;
+            
+            // Save to localStorage
+            saveProgress();
+            
+            // Check if course is fully completed
+            checkCourseCompletion();
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            localStorage.setItem('pythonCourseProgress', JSON.stringify(subjectProgress));
+        }
+
+        // Load progress from localStorage
+        function loadProgress() {
+            const savedProgress = localStorage.getItem('pythonCourseProgress');
+            if (savedProgress) {
+                const progress = JSON.parse(savedProgress);
+                for (const [trackerId, value] of Object.entries(progress)) {
+                    if (document.getElementById(trackerId)) {
+                        const tracker = document.getElementById(trackerId);
+                        const progressBar = tracker.querySelector('progress');
+                        const progressValue = tracker.querySelector('.progress-value');
+                        const completeBtn = tracker.querySelector('.complete-btn');
+                        
+                        subjectProgress[trackerId] = value;
+                        progressBar.value = value;
+                        progressValue.textContent = `${value}%`;
+                        
+                        if (value === 100) {
+                            completeBtn.textContent = '✓ Completed';
+                            completeBtn.style.backgroundColor = '#2e7d32';
+                            completeBtn.onclick = null;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Check if all subjects are completed
+        function checkCourseCompletion() {
+            const allCompleted = Object.values(subjectProgress).every(val => val === 100);
+            if (allCompleted) {
+                setTimeout(() => {
+                    alert('Congratulations! You have completed this course!');
+                }, 500);
+            }
+        }
+
+        // Add a new comment
+        function addComment() {
+            const commentInput = document.getElementById('comment-input');
+            const commentText = commentInput.value.trim();
+            
+            if (commentText) {
+                const commentsList = document.getElementById('comments-list');
+                const newComment = document.createElement('div');
+                newComment.classList.add('comment');
+                
+                const now = new Date();
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                const dateString = now.toLocaleDateString('en-US', options);
+                
+                newComment.innerHTML = `
+                    <p><strong>You:</strong> ${sanitizeInput(commentText)}</p>
+                    <span class="comment-date">Posted on ${dateString}</span>
+                `;
+                
+                commentsList.prepend(newComment);
+                commentInput.value = '';
+                
+                // Scroll to show the new comment
+                newComment.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Basic input sanitization
+        function sanitizeInput(input) {
+            const div = document.createElement('div');
+            div.textContent = input;
+            return div.innerHTML;
+        }
+
+        // Go back to dashboard
+        function goBack() {
+            // You can replace this with your actual dashboard URL
+            window.location.href = 'dashboard.html';
+            
+            // For demonstration, just show a message
+            // alert('Redirecting to dashboard...');
+        }
+    </script>
+</body>
+</html>

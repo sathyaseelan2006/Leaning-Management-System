@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course: Introduction to Programming - SMART LMS</title>
+    <style>
+             /* Background and Floating Animation */
+             body {
+            background-color: #bca4e1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            position: relative;
+            padding: 20px;
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+    
+        .floating-elements {
+            position: fixed; /* Fix floating elements to the viewport */
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none; /* Allow interaction with elements below */
+        }
+    
+        .element {
+            position: absolute;
+            font-size: 24px;
+            animation: float 5s linear infinite;
+            filter: drop-shadow(0 0 10px white);
+        }
+    
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    
+        .element:nth-child(1) { left: 10%; animation-duration: 4s; }
+        .element:nth-child(2) { left: 30%; animation-duration: 5s; }
+        .element:nth-child(3) { left: 50%; animation-duration: 6s; }
+        .element:nth-child(4) { left: 70%; animation-duration: 4.5s; }
+        .element:nth-child(5) { left: 90%; animation-duration: 5.5s; }
+    
+        /* Title Styling */
+        .title-container {
+            margin-bottom: 20px;
+            z-index: 2;
+        }
+    
+        .title-container h1 {
+            font-size: 32px;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+    
+        .title-container p {
+            font-size: 16px;
+            font-style: italic;
+            margin: 5px 0;
+            color: #ffeb3b;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+    
+        /* Course Content Styling */
+        .course-content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: left;
+            z-index: 2;
+            width: 80%;
+            max-width: 900px;
+            margin-bottom: 20px; /* Add space at the bottom for scrolling */
+        }
+    
+        .subject {
+            margin-bottom: 30px;
+        }
+    
+        .subject h3 {
+            font-size: 24px;
+            margin: 0 0 10px;
+        }
+    
+        .subject p {
+            font-size: 16px;
+            margin: 0 0 15px;
+            color: #ddd;
+        }
+    
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+    
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+    
+        .resources a {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+    
+        .resources a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    
+        .progress-tracker {
+            margin: 20px 0;
+        }
+    
+        .progress-tracker input[type="range"] {
+            width: 100%;
+        }
+    
+        .progress-tracker span {
+            margin-left: 10px;
+            font-weight: bold;
+        }
+    
+        .comments-section {
+            margin-top: 20px;
+        }
+    
+        .comments-section textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-bottom: 10px;
+        }
+    
+        .comments-section button {
+            background: #4caf50;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+    
+        .comments-section button:hover {
+            background: #45a049;
+        }
+    
+        .comments-list {
+            margin-top: 20px;
+        }
+    
+        .comment {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    
+        .comment p {
+            margin: 0;
+        }
+    
+        /* Back Button */
+        .back-btn {
+            background: #4caf50;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0 0 10px #4caf50;
+            margin-top: 20px;
+        }
+    
+        .back-btn:hover {
+            background: #45a049;
+            box-shadow: 0 0 20px #4caf50;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Background Elements -->
+    <div class="floating-elements">
+        <span class="element">📖</span>
+        <span class="element">✍️</span>
+        <span class="element">🔤</span>
+        <span class="element">📚</span>
+        <span class="element">📝</span>
+    </div>
+
+    <!-- Title Section -->
+    <div class="title-container">
+        <h1>Introduction to Data structures</h1>
+        <p>"Learn the basics of programming with c ."</p>
+    </div>
+
+    <!-- Course Content -->
+    <div class="course-content">
+        <!-- Subject 1 -->
+
+            <!-- Embedded YouTube Video -->
+            <div class="subject">
+                <h3>1. Arrays vs Linked Lists</h3>
+                <p>Understand the fundamental differences and when to use each</p>
+            
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/DuDz6B4cqVc" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            
+                <div class="resources">
+                    <a href="arrays-linkedlists.pdf" download>Download Comparison Chart</a>
+                    <a href="ll-implementation.zip" download>Code Examples</a>
+                </div>
+            </div>
+
+            <!-- Downloadable Resources -->
+            <div class="resources">
+                <a href="python-intro.pdf" download onclick="updateProgress()">Download PDF</a>
+                <a href="python-intro.pptx" download onclick="updateProgress()">Download PPT</a>
+            </div>
+
+            <!-- Progress Tracker -->
+            <div class="progress-tracker">
+                <label for="progress">Your Progress:</label>
+                <progress id="progress" value="0" max="100"></progress>
+                <span id="progress-value">0%</span>
+            </div>
+        </div>
+
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+            <h3>Comments</h3>
+            <textarea id="comment-input" placeholder="Leave a comment or ask a question..." rows="4"></textarea>
+            <button onclick="addComment()">Post Comment</button>
+            <div class="comments-list" id="comments-list">
+                <!-- Comments will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-btn" onclick="goBack()">⬅️ Back to Dashboard</button>
+
+    <script>
+        // JavaScript for Automatic Progress Bar and Comments Section
+
+        // Track completed tasks
+        let completedTasks = 0;
+        const totalTasks = 5; // Total number of tasks (videos, downloads, etc.)
+
+        // Update Progress Function
+        function updateProgress() {
+            completedTasks += 1; // Increment completed tasks
+            const progress = (completedTasks / totalTasks) * 100; // Calculate progress percentage
+            const progressBar = document.getElementById('progress');
+            const progressValue = document.getElementById('progress-value');
+
+            progressBar.value = progress; // Update progress bar
+            progressValue.textContent = `${Math.round(progress)}%`; // Update progress text
+        }
+
+        // Add Comment Function
+        function addComment() {
+            const commentInput = document.getElementById('comment-input');
+            const commentText = commentInput.value.trim();
+            if (commentText) {
+                const commentsList = document.getElementById('comments-list');
+                const newComment = document.createElement('div');
+                newComment.classList.add('comment');
+                newComment.innerHTML = `<p><strong>You:</strong> ${commentText}</p>`;
+                commentsList.appendChild(newComment);
+                commentInput.value = ''; // Clear the input
+            }
+        }
+
+        // Back to Dashboard Function
+        function goBack() {
+            window.location.href = 'http://localhost/DBMS%20PROJECT/std_dash.html'; // Replace with your dashboard URL
+        }
+
+        // Automatically update progress when video is watched
+        const videoIframes = document.querySelectorAll('.video-container iframe');
+        videoIframes.forEach(iframe => {
+            iframe.addEventListener('load', () => {
+                iframe.contentWindow.postMessage('{"event":"command","func":"play","args":""}', '*');
+            });
+        });
+
+        // Listen for video completion
+        window.addEventListener('message', (event) => {
+            if (event.data === 'videoCompleted') {
+                updateProgress();
+            }
+        });
+    </script>
+</body>
+</html>

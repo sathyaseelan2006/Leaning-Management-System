@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - LMS</title>
+    <style>
+        body {
+            background-color: #bca4e1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        /* Floating Background Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .element {
+            position: absolute;
+            font-size: 24px;
+            animation: float 5s linear infinite;
+            filter: drop-shadow(0 0 10px white);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .element:nth-child(1) { left: 10%; animation-duration: 4s; }
+        .element:nth-child(2) { left: 30%; animation-duration: 5s; }
+        .element:nth-child(3) { left: 50%; animation-duration: 6s; }
+        .element:nth-child(4) { left: 70%; animation-duration: 4.5s; }
+        .element:nth-child(5) { left: 90%; animation-duration: 5.5s; }
+
+        /* Title Styling */
+        .title-container {
+            margin-bottom: 20px;
+            z-index: 2;
+        }
+
+        .title-container h1 {
+            font-size: 32px;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .title-container p {
+            font-size: 16px;
+            font-style: italic;
+            margin: 5px 0;
+            color: #ffeb3b;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Dashboard Box */
+        .dashboard-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            z-index: 2;
+            width: 80%;
+            max-width: 900px;
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Dashboard Links */
+        .dashboard-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .link-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .link-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        .link-box a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            padding: 10px;
+        }
+
+        .link-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* Logout Button */
+        .logout-btn {
+            background: #ff3b3b;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0 0 10px #ff3b3b;
+            margin-top: 20px;
+        }
+
+        .logout-btn:hover {
+            background: #d32f2f;
+            box-shadow: 0 0 20px #ff3b3b;
+        }
+        a {
+  color: inherit;  /* Inherit color from the parent element */
+  text-decoration: none;  /* Remove the underline */
+}
+    </style>
+</head>
+<body>
+
+    <!-- Floating Background Elements -->
+    <div class="floating-elements">
+        <span class="element">📖</span>
+        <span class="element">✍️</span>
+        <span class="element">🔤</span>
+        <span class="element">📚</span>
+        <span class="element">📝</span>
+    </div>
+
+    <!-- Title Section -->
+    <div class="title-container">
+        <h1>Student Dashboard - SMART LMS</h1>
+        <p>"Learn, submit assignments, and track progress seamlessly."</p>
+    </div>
+
+    <!-- Student Dashboard -->
+    <div class="dashboard-box">
+        <div class="dashboard-header">
+            Welcome to Your Dashboard
+        </div>
+        <div class="dashboard-links">
+            <div class="link-box">
+                <a href="course.html">📖 My Courses</a>
+            </div>
+            <div class="link-box">
+                <a href="studymaterials.html">📂 Study Materials</a>
+            </div>
+            <div class="link-box">
+                <a href="assign.html">📝 Assignments</a>
+            </div>
+            <div class="link-box">
+                <a href="grade.html">📊 Performance & Grades</a>
+            </div>
+            <div class="link-box">
+                <a href="http://localhost/project/index.html">📅 Mark Attendance</a>
+            </div>
+            <div class="link-box">
+                <a href="guideline.html">Guideline</a>
+            </div>
+        </div>
+        
+        <!-- Logout Button -->
+        <button class="logout-btn" onclick="logout()"><a href="login.html">🚪 Logout</a></button>
+    </div>
+
+   
+
+</body>
+</html>

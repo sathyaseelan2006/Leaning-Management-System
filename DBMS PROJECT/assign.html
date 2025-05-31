@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments - SMART LMS</title>
+    <style>
+        /* Background and Floating Animation */
+        body {
+            background-color: #bca4e1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            position: relative;
+            padding: 20px;
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        .floating-elements {
+            position: fixed; /* Fix floating elements to the viewport */
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none; /* Allow interaction with elements below */
+        }
+
+        .element {
+            position: absolute;
+            font-size: 24px;
+            animation: float 5s linear infinite;
+            filter: drop-shadow(0 0 10px white);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .element:nth-child(1) { left: 10%; animation-duration: 4s; }
+        .element:nth-child(2) { left: 30%; animation-duration: 5s; }
+        .element:nth-child(3) { left: 50%; animation-duration: 6s; }
+        .element:nth-child(4) { left: 70%; animation-duration: 4.5s; }
+        .element:nth-child(5) { left: 90%; animation-duration: 5.5s; }
+
+        /* Title Styling */
+        .title-container {
+            margin-bottom: 20px;
+            z-index: 2;
+        }
+
+        .title-container h1 {
+            font-size: 32px;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .title-container p {
+            font-size: 16px;
+            font-style: italic;
+            margin: 5px 0;
+            color: #ffeb3b;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Assignments Container */
+        .assignments-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: left;
+            z-index: 2;
+            width: 80%;
+            max-width: 900px;
+            margin-bottom: 20px;
+        }
+
+        /* Assignment Item */
+        .assignment-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+            margin-bottom: 15px; /* Added margin for better spacing between assignments */
+        }
+
+        .assignment-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        .assignment-item h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .assignment-item p {
+            margin: 10px 0 0;
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        .assignment-item .due-date {
+            font-weight: bold;
+            color: #ffeb3b;
+        }
+
+        .assignment-item .upload-section {
+            margin-top: 15px; /* Add spacing between description and upload button */
+            margin-bottom: 20px; /* Add spacing between upload button and submit button */
+        }
+
+        .assignment-item input[type="file"] {
+            display: none;
+        }
+
+        .assignment-item .upload-btn {
+            background: #4caf50;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 10px; /* Added bottom margin for spacing */
+        }
+
+        .assignment-item .upload-btn:hover {
+            background: #45a049;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background: #ddd;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 20px;
+            background: #4caf50;
+            border-radius: 5px;
+        }
+
+        .progress-value {
+            color: white;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: #4caf50;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0 0 10px #4caf50;
+            margin-top: 20px;
+        }
+
+        .back-btn:hover {
+            background: #45a049;
+            box-shadow: 0 0 20px #4caf50;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Background Elements -->
+    <div class="floating-elements">
+        <span class="element">📖</span>
+        <span class="element">✍️</span>
+        <span class="element">🔤</span>
+        <span class="element">📚</span>
+        <span class="element">📝</span>
+    </div>
+
+    <!-- Title Section -->
+    <div class="title-container">
+        <h1>Assignments - SMART LMS</h1>
+        <p>"Submit your assignments and track your progress."</p>
+    </div>
+
+    <!-- Assignments Container -->
+    <div class="assignments-container">
+        <!-- Assignment 1 -->
+        <div class="assignment-item">
+            <h3>Assignment 1: Python Basics</h3>
+            <p>Write a Python program to calculate the factorial of a number.</p>
+            <p class="due-date">Due Date: October 30, 2025</p>
+            <form action="assignment_submission.php" method="POST" enctype="multipart/form-data">
+                <div class="upload-section">
+                    <label for="file-upload-1" class="upload-btn">Upload Assignment</label>
+                    <input type="file" name="assignment1" id="file-upload-1" onchange="handleFileUpload(1)">
+                </div>
+                <button type="submit" class="upload-btn">Submit Assignment</button>
+            </form>
+        </div>
+
+        <!-- Assignment 2 -->
+        <div class="assignment-item">
+            <h3>Assignment 2: Web Development</h3>
+            <p>Create a simple HTML page with a form and style it using CSS.</p>
+            <p class="due-date">Due Date: November 5, 2025</p>
+            <form action="assignment_submission.php" method="POST" enctype="multipart/form-data">
+                <div class="upload-section">
+                    <label for="file-upload-2" class="upload-btn">Upload Assignment</label>
+                    <input type="file" name="assignment2" id="file-upload-2" onchange="handleFileUpload(2)">
+                </div>
+                <button type="submit" class="upload-btn">Submit Assignment</button>
+            </form>
+        </div>
+
+        <!-- Assignment 3 -->
+        <div class="assignment-item">
+            <h3>Assignment 3: Data Base Management System</h3>
+            <p>Create and run SQL queries of DDL and DML commands</p>
+            <p class="due-date">Due Date: November 10, 2025</p>
+            <form action="assignment_submission.php" method="POST" enctype="multipart/form-data">
+                <div class="upload-section">
+                    <label for="file-upload-3" class="upload-btn">Upload Assignment</label>
+                    <input type="file" name="assignment3" id="file-upload-3" onchange="handleFileUpload(3)">
+                </div>
+                <button type="submit" class="upload-btn">Submit Assignment</button>
+            </form>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progress"></div>
+            <div class="progress-value" id="progress-value">0%</div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-btn" onclick="goBack()">⬅️ Back to Dashboard</button>
+
+    <script>
+        // Handle File Upload
+        function handleFileUpload(assignmentId) {
+            const fileInput = document.getElementById(`file-upload-${assignmentId}`);
+            const file = fileInput.files[0];
+            if (file) {
+                alert(`File "${file.name}" uploaded for Assignment ${assignmentId}.`);
+                updateProgress(); // Update progress after submission
+            }
+        }
+
+        // Update Progress Function
+        function updateProgress() {
+            const progressBar = document.getElementById('progress');
+            const progressValue = document.getElementById('progress-value');
+            const currentProgress = parseInt(progressBar.style.width) || 0;
+            const newProgress = currentProgress + 33; // Increment progress by 33%
+
+            progressBar.style.width = newProgress + '%';
+            progressValue.textContent = newProgress + '%';
+        }
+
+        // Back to Dashboard Function
+        function goBack() {
+            window.location.href = 'http://localhost/DBMS%20PROJECT/std_dash.html'; // Replace with your dashboard URL
+        }
+    </script>
