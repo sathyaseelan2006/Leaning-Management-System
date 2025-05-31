@@ -1,8 +1,9 @@
 # 🎓 SMART Learning Management System (LMS)
 
 
-![GitHub stars]([https://img.shields.io/github/stars/your-username/smart-lms?style=social](https://github.com/sathyaseelan2006/Leaning-Management-System/stargazers))
-![GitHub forks]([https://img.shields.io/github/forks/your-username/smart-lms?style=social](https://github.com/sathyaseelan2006/Leaning-Management-System/forks))
+![GitHub stars](https://img.shields.io/github/stars/sathyaseelan2006/Leaning-Management-System?style=social)
+![GitHub forks](https://img.shields.io/github/forks/sathyaseelan2006/Leaning-Management-System?style=social)
+
 
 
 An AI-powered and modern **Learning Management System (LMS)** for managing courses, students, assignments, grades, and more — with a clean, interactive, and responsive interface.
